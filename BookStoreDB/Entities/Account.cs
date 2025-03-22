@@ -16,5 +16,7 @@ namespace BookStoreDB.Entities
 
         [Required]
         public string Password { get; set; }
+
+
     }
 }

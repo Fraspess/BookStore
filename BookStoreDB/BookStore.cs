@@ -16,6 +16,10 @@ namespace BookStoreDB
         public DbSet<Author> authors { get; set; }
 
         public DbSet<Genre> genres { get; set; }
+
+        public DbSet<Discounts>discounts { get; set; }
+
+        public DbSet<Promotion> promotions { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

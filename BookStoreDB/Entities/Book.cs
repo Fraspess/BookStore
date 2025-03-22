@@ -40,7 +40,7 @@ namespace BookStoreDB.Entities
 
         public Genre Genre { get; set; }
 
-        public IEnumerable<BookPromotion> BookPromotions{ get; set; }
+        public ICollection<BookPromotion> BookPromotions{ get; set; }
 
 
     }

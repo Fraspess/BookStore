@@ -12,6 +12,6 @@ namespace BookStoreDB.Entities
 
         public string FullName { get; set; }
 
-        public IEnumerable<Book> Books { get; set; } = new HashSet<Book>();
+        public ICollection<Book> Books { get; set; } = new HashSet<Book>();
     }
 }

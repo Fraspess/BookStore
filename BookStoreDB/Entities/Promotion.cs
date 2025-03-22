@@ -14,6 +14,6 @@ namespace BookStoreDB.Entities
 
         public decimal DiscountPercentage { get; set; }
 
-        public IEnumerable<BookPromotion> bookPromotion { get; set; } = new HashSet<BookPromotion>();
+        public ICollection<BookPromotion> bookPromotion { get; set; } = new HashSet<BookPromotion>();
     }
 }

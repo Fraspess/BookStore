@@ -4,6 +4,7 @@ using BookStoreDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStoreDB.Migrations
 {
     [DbContext(typeof(BookStore))]
-    partial class BookStoreModelSnapshot : ModelSnapshot
+    [Migration("20250322182008_IsAdminRevert")]
+    partial class IsAdminRevert
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,7 +270,7 @@ namespace BookStoreDB.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("discounts");
+                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("BookStoreDB.Entities.Genre", b =>
@@ -331,7 +334,7 @@ namespace BookStoreDB.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("promotions");
+                    b.ToTable("Promotion");
                 });
 
             modelBuilder.Entity("BookStoreDB.Entities.Book", b =>

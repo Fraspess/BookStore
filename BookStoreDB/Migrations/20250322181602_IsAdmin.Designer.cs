@@ -4,6 +4,7 @@ using BookStoreDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStoreDB.Migrations
 {
     [DbContext(typeof(BookStore))]
-    partial class BookStoreModelSnapshot : ModelSnapshot
+    [Migration("20250322181602_IsAdmin")]
+    partial class IsAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +32,9 @@ namespace BookStoreDB.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Login")
                         .IsRequired()
@@ -46,12 +52,14 @@ namespace BookStoreDB.Migrations
                         new
                         {
                             Id = -1,
+                            IsAdmin = true,
                             Login = "admin",
                             Password = "admin"
                         },
                         new
                         {
                             Id = -2,
+                            IsAdmin = false,
                             Login = "user",
                             Password = "user"
                         });
@@ -267,7 +275,7 @@ namespace BookStoreDB.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("discounts");
+                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("BookStoreDB.Entities.Genre", b =>
@@ -331,7 +339,7 @@ namespace BookStoreDB.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("promotions");
+                    b.ToTable("Promotion");
                 });
 
             modelBuilder.Entity("BookStoreDB.Entities.Book", b =>

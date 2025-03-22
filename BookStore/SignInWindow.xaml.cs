@@ -42,6 +42,7 @@ namespace BookStoreApp
                     main.IsEnabled = true;
                     main.Show();
                     
+                    
                 }
                 
             }
