@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Windows;
 using BookStoreDB.Entities;
+using BookStoreDB.ViewWpf;
+using System.Collections.ObjectModel;
 
 namespace BookStoreApp
 {
@@ -28,6 +30,8 @@ namespace BookStoreApp
 
         private void ShowButton_Click(object sender, RoutedEventArgs e)
         {
+            
+
             switch(cb.Text)
             {
                 case "":
@@ -36,23 +40,50 @@ namespace BookStoreApp
 
                 case "Books":
                     {
-                        DbTable.ItemsSource = context.books.ToList();
+                        var books = context.books
+                            .Include(b => b.Author)
+                            .Include(b => b.Genre)
+                            .Select(b=>new BookViewWpf
+                            {
+                                Id = b.Id,
+                                Title = b.Title,
+                                Publisher = b.Publisher,
+                                PublicationYear = b.PublicationYear,
+                                CostPrice = b.CostPrice,
+                                SellPrice = b.SellPrice,
+                                IsSequel = b.IsSequel,
+                                PageCount = b.PageCount,
+                                Author = b.Author.FullName,
+                                Genre = b.Genre.Name
+                                
+                            })
+                            .ToList();
+                        DbTable.ItemsSource = books;
                         
                         break;
                     }
                 case "Authors":
                     {
+                        var authors = context.authors
+                           .Include(a => a.Books)
+                           .AsNoTracking()
+                           .ToList()
+                           .Select(a => new AuthorViewWpf
+                           {
+                               Id = a.Id,
+                               FullName = a.FullName,
+                               Books = a.Books.Select(b => new BookViewWpf
+                               {
+                                   Title = b.Title,
+                                   Publisher = b.Publisher,
+                                   PublicationYear = b.PublicationYear,
+                                   IsSequel = b.IsSequel
+                               }).ToList()
+                           }).ToList();
+                        DbTable.ItemsSource = authors.ToList();
 
 
-                        var authors = context.authors.Select(a => new
-                        {
-                            a.FullName,
-                            Books = a.Books.Select(b => b.Title)
-
-                        }).ToList();
-
-                        DbTable.ItemsSource = authors;
-                            break;
+                        break;
                     }
                 case "Genres":
                     {
