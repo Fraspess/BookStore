@@ -15,14 +15,12 @@
         <DockPanel>
             <ComboBox Name="cb" Width="100"></ComboBox>
             <Button Name="ShowButton" Click="ShowButton_Click" Width="100" Margin="4">Show</Button>
-            <Button Name="UpdateButton" Click="UpdateButton_Click" Width="100" Margin="4">Update</Button>
             <Button Name="DeleteButton" Click="DeleteButton_Click" Width="100" Margin="4">Delete</Button>
             <TextBox Name="cmd" Margin="4" Text="Enter id here to delete" GotFocus="cmd_GotFocus" LostFocus="cmd_LostFocus"></TextBox>
         </DockPanel>
 
-        <DataGrid Name="DbTable" Grid.Row="1" >
-            
-        </DataGrid>
+        
+
 
     </Grid>
 </Window>

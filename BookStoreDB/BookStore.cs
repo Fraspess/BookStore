@@ -24,7 +24,8 @@ namespace BookStoreDB
         {
             base.OnConfiguring(optionsBuilder);
 
-
+            
+            
             optionsBuilder.UseSqlServer(@"
                                          Data Source = FRASP\SQLEXPRESS;
                                          Initial Catalog = BookStoreDb;
@@ -34,6 +35,7 @@ namespace BookStoreDB
                                          Trust Server Certificate = False;
                                          Application Intent = ReadWrite;
                                          Multi Subnet Failover = False
+
                                         ");
         }
 
@@ -41,7 +43,7 @@ namespace BookStoreDB
         {
             base.OnModelCreating(modelBuilder);
 
-
+            
             // one to many
             modelBuilder.Entity<Book>()
                 .HasOne(b => b.Author)

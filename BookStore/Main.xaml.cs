@@ -5,6 +5,9 @@ using System.Windows;
 using BookStoreDB.Entities;
 using BookStoreDB.ViewWpf;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using BookStoreApp.ShowWindows;
+using System.Windows.Controls;
 
 namespace BookStoreApp
 {
@@ -24,7 +27,7 @@ namespace BookStoreApp
         {
             InitializeComponent();
 
-            cb.ItemsSource = new List<string>() { "", "Books","Authors","Genres","Promotions","Discounts" };
+            cb.ItemsSource = new List<string>() { "", "Books","Authors","Genres","Discounts" };
             
         }
 
@@ -40,78 +43,116 @@ namespace BookStoreApp
 
                 case "Books":
                     {
-                        var books = context.books
-                            .Include(b => b.Author)
-                            .Include(b => b.Genre)
-                            .Select(b=>new BookViewWpf
-                            {
-                                Id = b.Id,
-                                Title = b.Title,
-                                Publisher = b.Publisher,
-                                PublicationYear = b.PublicationYear,
-                                CostPrice = b.CostPrice,
-                                SellPrice = b.SellPrice,
-                                IsSequel = b.IsSequel,
-                                PageCount = b.PageCount,
-                                Author = b.Author.FullName,
-                                Genre = b.Genre.Name
+                        ShowBooks showBooks = new ShowBooks();
+                        showBooks.Show();
+                        //var books = context.books
+                        //    .Include(b => b.Author)
+                        //    .Include(b => b.Genre)
+                        //    .Select(b=>new BookViewWpf
+                        //    {
+                        //        Id = b.Id,
+                        //        Title = b.Title,
+                        //        Publisher = b.Publisher,
+                        //        PublicationYear = b.PublicationYear,
+                        //        CostPrice = b.CostPrice,
+                        //        SellPrice = b.SellPrice,
+                        //        IsSequel = b.IsSequel,
+                        //        PageCount = b.PageCount,
+                        //        Author = b.Author.FullName,
+                        //        Genre = b.Genre.Name
                                 
-                            })
-                            .ToList();
-                        DbTable.ItemsSource = books;
+                        //    })
+                        //    .ToList();
+                        //DbTable.ItemsSource = books;
                         
                         break;
                     }
                 case "Authors":
                     {
-                        var authors = context.authors
-                           .Include(a => a.Books)
-                           .AsNoTracking()
-                           .ToList()
-                           .Select(a => new AuthorViewWpf
-                           {
-                               Id = a.Id,
-                               FullName = a.FullName,
-                               Books = a.Books.Select(b => new BookViewWpf
-                               {
-                                   Title = b.Title,
-                                   Publisher = b.Publisher,
-                                   PublicationYear = b.PublicationYear,
-                                   IsSequel = b.IsSequel
-                               }).ToList()
-                           }).ToList();
-                        DbTable.ItemsSource = authors.ToList();
+                        ShowAuthors showAuthors = new ShowAuthors();
+                        showAuthors.Show();
 
+                        //foreach (var author in authors)
+                        //{
+                        //    Debug.WriteLine($"Author: {author.FullName}, Books Count: {author.Books.Count}");
+                        //    foreach (var book in author.Books)
+                        //    {
+                        //        Debug.WriteLine($"Book: {book.Title}");
+                        //    }
+                        //}
 
                         break;
                     }
                 case "Genres":
                     {
-                        DbTable.ItemsSource = context.genres.ToList();
+                        ShowGenres showGenres = new ShowGenres();
+                        showGenres.Show();
                         break;
-                    }
-                case "Promotions":
-                    {
-                        DbTable.ItemsSource = context.promotions.ToList();
-                        break;   
                     }
                 case "Discounts":
                     {
-                        DbTable.ItemsSource = context.discounts.ToList();
+                        ShowDiscounts showDiscounts = new ShowDiscounts();
+                        showDiscounts.Show();
+                        
                         break;
                     }
 
             }
         }
 
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            switch(cb.Text)
+            {
+                case "Books":
+                    {
+                        if (int.TryParse(cmd.Text, out int id))
+                        {
+                            var book = new Book{ Id = id};
+                            context.books.Attach(book);
+                            context.books.Remove(book);
+                            context.SaveChanges();
+                        }
+                        
+                        break;
+                    }
 
+                case "Authors":
+                    {
+                        if(int.TryParse(cmd.Text,out int id))
+                        {
+                            var author = new Author { Id = id };
+                            context.authors.Attach(author);
+                            context.authors.Remove(author);
+                            context.SaveChanges();
+                        }
+                        break;
+                    }
+                case "Genres":
+                    {
+                        if(int.TryParse(cmd.Text,out int id))
+                        {
+                            var genre = new Genre { Id = id };
+                            context.genres.Attach(genre);
+                            context.genres.Remove(genre);
+                            context.SaveChanges();
+                        }
+                        break;
+                    }
+                case "Discounts":
+                    {
+                        if(int.TryParse(cmd.Text,out int id))
+                        {
+                            var discount = new Discounts { Id = id };
+                            context.discounts.Attach(discount);
+                            context.discounts.Remove(discount);
+                            context.SaveChanges();
+                        }    
+                        break;
+                    }
+            }
         }
 
         private void cmd_GotFocus(object sender, RoutedEventArgs e)

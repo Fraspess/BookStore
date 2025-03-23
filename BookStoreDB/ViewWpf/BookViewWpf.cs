@@ -10,6 +10,7 @@ namespace BookStoreDB.ViewWpf
 {
     public class BookViewWpf
     {
+
         public int Id { get; set; }
         public string Title { get; set; }
         public string Publisher { get; set; }
