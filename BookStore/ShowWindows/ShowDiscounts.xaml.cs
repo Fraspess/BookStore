@@ -40,5 +40,25 @@ namespace BookStoreApp.ShowWindows
                 }).ToList();
             DbTable.ItemsSource = discounts.ToList();
         }
+
+        private void Update_Button_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var item in DbTable.ItemsSource)
+            {
+                if (item is DiscountsViewWpf updatedDiscount)
+                {
+                    var discountInDb = context.discounts.FirstOrDefault(d => d.Id == updatedDiscount.Id);
+                    if (discountInDb != null)
+                    {
+                        discountInDb.StartDate = updatedDiscount.StartDate;
+                        discountInDb.EndDate = updatedDiscount.EndDate;
+                        discountInDb.Discount = updatedDiscount.Discount;
+                    }
+                }
+            }
+            context.SaveChanges();
+            MessageBox.Show("Database update successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+        }
     }
 }

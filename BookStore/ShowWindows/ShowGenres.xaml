@@ -13,11 +13,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Name="Update_Button" Width="100" Content="Update database" Grid.Row="0"/>
+        <Button Name="Update_Button" Width="100" Click="Update_Button_Click"  Content="Update database" Grid.Row="0"/>
 
         <DataGrid Name="DbTable" Grid.Row="1" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Genre" Binding="{Binding Name}"/>
                 <DataGridTemplateColumn Header="Books">
                     <DataGridTemplateColumn.CellTemplate>

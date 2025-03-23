@@ -45,5 +45,22 @@ namespace BookStoreApp.ShowWindows
                 
             
         }
+
+        private void Update_Button_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var item in DbTable.Items)
+            {
+                if(item is GenresViewWpf updatedGenre)
+                {
+                    var genreInDb = context.genres.FirstOrDefault(g => g.Id == updatedGenre.Id);
+                    if(genreInDb != null)
+                    {
+                        genreInDb.Name = updatedGenre.Name;
+                    }
+                }
+            }
+                context.SaveChanges();
+            MessageBox.Show("Database update successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }

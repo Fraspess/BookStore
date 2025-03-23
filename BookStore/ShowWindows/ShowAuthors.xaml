@@ -12,17 +12,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Name="Update_Button" Width="100" Content="Update database" Grid.Row="0"/>
+        <Button Name="Update_Button"  Click="Update_Button_Click" Width="100" Content="Update database" Grid.Row="0"/>
 
 
         <DataGrid Name="DbTable" AutoGenerateColumns="False" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
                 <DataGridTemplateColumn Header="Books">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DataGrid ItemsSource="{Binding Books}" AutoGenerateColumns="False" IsReadOnly="False">
+                            <DataGrid ItemsSource="{Binding Books}" AutoGenerateColumns="False" IsReadOnly="True">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="300"/>
                                     <DataGridTextColumn Header="Publisher" Binding="{Binding Publisher}" Width="150"/>

@@ -114,6 +114,7 @@ namespace BookStoreApp
                             context.books.Attach(book);
                             context.books.Remove(book);
                             context.SaveChanges();
+                            MessageBox.Show("Successfully deleted");
                         }
                         
                         break;
@@ -127,6 +128,7 @@ namespace BookStoreApp
                             context.authors.Attach(author);
                             context.authors.Remove(author);
                             context.SaveChanges();
+                            MessageBox.Show("Successfully deleted");
                         }
                         break;
                     }
@@ -138,6 +140,7 @@ namespace BookStoreApp
                             context.genres.Attach(genre);
                             context.genres.Remove(genre);
                             context.SaveChanges();
+                            MessageBox.Show("Successfully deleted");
                         }
                         break;
                     }
@@ -149,6 +152,7 @@ namespace BookStoreApp
                             context.discounts.Attach(discount);
                             context.discounts.Remove(discount);
                             context.SaveChanges();
+                            MessageBox.Show("Successfully deleted");
                         }    
                         break;
                     }

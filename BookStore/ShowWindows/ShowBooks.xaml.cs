@@ -47,5 +47,35 @@ namespace BookStoreApp.ShowWindows
                             .ToList();
             DbTable.ItemsSource = books;
         }
+
+        private void Update_Button_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in DbTable.Items)
+            {
+                if (item is BookViewWpf updatedBook)
+                {
+                    var bookInDb = context.books.FirstOrDefault(b => b.Id == updatedBook.Id);
+                    if (bookInDb != null)
+                    {
+                        bookInDb.Title = updatedBook.Title;
+                        bookInDb.Publisher = updatedBook.Publisher;
+                        bookInDb.PublicationYear = updatedBook.PublicationYear;
+                        bookInDb.CostPrice = updatedBook.CostPrice;
+                        bookInDb.SellPrice = updatedBook.SellPrice;
+                        bookInDb.IsSequel = updatedBook.IsSequel;
+                        bookInDb.PageCount = updatedBook.PageCount;
+                    }
+                }
+            }
+            try
+            {
+                context.SaveChanges(); 
+                MessageBox.Show("Database updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating database: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
