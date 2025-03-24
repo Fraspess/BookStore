@@ -8,18 +8,28 @@
         Title="Main" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/> 
+            <RowDefinition Height="100"/> 
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DockPanel>
+        <Label Content="----- Main App -----"  FontFamily="Arial" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+
+        <DockPanel  Grid.Row="1">
             <ComboBox Name="cb" Width="100"></ComboBox>
             <Button Name="ShowButton" Click="ShowButton_Click" Width="100" Margin="4">Show</Button>
             <Button Name="DeleteButton" Click="DeleteButton_Click" Width="100" Margin="4">Delete</Button>
+            <Button Name="AddBookButton" Click="AddBookButton_Click" Width="100" Margin="4">Add</Button>
             <TextBox Name="cmd" Margin="4" Text="Enter id here to delete" GotFocus="cmd_GotFocus" LostFocus="cmd_LostFocus"></TextBox>
         </DockPanel>
 
-        
+        <Label Grid.Row="2" Content="----- Interesting Facts -----"  FontFamily="Arial" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+
+        <Label  Grid.Row="3" FontFamily="Segoe UI Semibold" HorizontalAlignment="Center" VerticalContentAlignment="Top" Content="Did you know that The longest novel ever written is À la recherche du temps perdu by Marcel Proust—over 1.2 million words! "></Label>
+
+
+
 
 
     </Grid>

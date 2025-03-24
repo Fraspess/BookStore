@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using BookStoreApp.ShowWindows;
 using System.Windows.Controls;
+using BookStoreApp.AddWindows;
 
 namespace BookStoreApp
 {
@@ -172,6 +173,19 @@ namespace BookStoreApp
             if(string.IsNullOrWhiteSpace(cmd.Text))
             {
                 cmd.Text = "Enter id here to delete";
+            }
+        }
+
+        private void AddBookButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch(cb.Text)
+            {
+                case "Books":
+                    {
+                        AddBookWindow addBook = new AddBookWindow();
+                        addBook.Show();
+                        break;
+                    }
             }
         }
     }
