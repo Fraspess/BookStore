@@ -12,8 +12,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Name="Update_Button" Width="100" Click="Update_Button_Click" Content="Update database" Grid.Row="0"/>
-        
+        <DockPanel>
+            <Button Name="Update_Button" Width="100" Click="Update_Button_Click" Content="Update database" Grid.Row="0"/>
+            <Button Name="SortButton" Width="100"  Content="Sort Books" Grid.Row="0" Click = "SortButton_Click" />
+        </DockPanel>
+
         <DataGrid Name="DbTable" Grid.Row="1" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>

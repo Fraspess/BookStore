@@ -21,6 +21,7 @@
             <Button Name="ShowButton" Click="ShowButton_Click" Width="100" Margin="4">Show</Button>
             <Button Name="DeleteButton" Click="DeleteButton_Click" Width="100" Margin="4">Delete</Button>
             <Button Name="AddBookButton" Click="AddBookButton_Click" Width="100" Margin="4">Add</Button>
+
             <TextBox Name="cmd" Margin="4" Text="Enter id here to delete" GotFocus="cmd_GotFocus" LostFocus="cmd_LostFocus"></TextBox>
         </DockPanel>
 

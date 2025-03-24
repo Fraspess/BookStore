@@ -186,7 +186,28 @@ namespace BookStoreApp
                         addBook.Show();
                         break;
                     }
+
+                case "Authors":
+                    {
+                        AddAuthor addAuthor = new AddAuthor();
+                        addAuthor.Show();
+                        break;
+                    }
+                case "Genres":
+                    {
+                        AddGenre addGenre = new AddGenre();
+                        addGenre.Show();
+                        break;
+                    }
+                case "Discounts":
+                    {
+                        AddDiscount addDiscount = new AddDiscount();
+                        addDiscount.Show();
+                        break;
+                    }
             }
         }
-    }
+
 }
+    }
+

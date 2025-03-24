@@ -77,5 +77,29 @@ namespace BookStoreApp.ShowWindows
                 MessageBox.Show("Error updating database: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void SortButton_Click(object sender, RoutedEventArgs e)
+        {
+            var books = context.books
+                           .Include(b => b.Author)
+                           .Include(b => b.Genre)
+                           .Select(b => new BookViewWpf
+                           {
+                               Id = b.Id,
+                               Title = b.Title,
+                               Publisher = b.Publisher,
+                               PublicationYear = b.PublicationYear,
+                               CostPrice = b.CostPrice,
+                               SellPrice = b.SellPrice,
+                               IsSequel = b.IsSequel,
+                               PageCount = b.PageCount,
+                               Author = b.Author.FullName,
+                               Genre = b.Genre.Name
+
+                           })
+                           .OrderByDescending(b=>b.SellPrice)
+                           .ToList();
+            DbTable.ItemsSource = books;
+        }
     }
 }
